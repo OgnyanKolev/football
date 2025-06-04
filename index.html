@@ -9,6 +9,19 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <nav class="navbar">
+  <div class="logo">⚽ FootballShop</div>
+  <ul class="menu">
+    <li><a href="#">Начало</a></li>
+    <li><a href="#">La Liga</a></li>
+    <li><a href="#">Premier League</a></li>
+    <li><a href="#">Serie A</a></li>
+    <li><a href="#">Национални отбори</a></li>
+    <li><a href="#custom-order">Персонализирай</a></li>
+
+  </ul>
+</nav>
+
   <header>
     <h1>Футболни Фланелки 2025/26</h1>
   </header>
@@ -43,10 +56,38 @@
 
   </main>
 
-  <section class="cart-section">
-    <h3>🛒 Количка:</h3>
-    <ul id="cart"></ul>
-    <p id="total">Общо: 0.00 лв</p>
+<section class="cart-section">
+  <h3>🛒 Количка:</h3>
+  <ul id="cart"></ul>
+  <p id="total">Общо: 0.00 лв</p>
+
+  <select class="size-select">
+  <option value="">-- Размер --</option>
+  <option>S</option>
+  <option>M</option>
+  <option>L</option>
+  <option>XL</option>
+</select>
+
+
+  <h3>📦 Поръчка:</h3>
+  <form id="orderForm" onsubmit="submitOrder(event)">
+    <div class="form-group">
+      <label for="name">Име</label>
+      <input type="text" id="name" placeholder="Вашето име" required />
+    </div>
+    <div class="form-group">
+      <label for="address">Адрес</label>
+      <input type="text" id="address" placeholder="Вашият адрес" required />
+    </div>
+    <button type="submit" class="order-button">📨 Изпрати поръчка</button>
+  </form>
+
+  <div id="confirmation" class="confirmation hidden">
+    ✅ Благодарим! Поръчката беше изпратена успешно.
+  </div>
+</section>
+
 
     <form id="orderForm" onsubmit="submitOrder(event)">
       <input type="text" id="name" placeholder="Име" required />
@@ -59,3 +100,39 @@
   <script src="script.js"></script>
 </body>
 </html>
+<section class="custom-order" id="custom-order">
+  <h3>🎨 Персонализирай своята фланелка</h3>
+  <form id="customForm" onsubmit="submitCustomOrder(event)">
+    <div class="form-group">
+      <label for="product">Избери отбор</label>
+      <select id="product" required>
+        <option value="">-- Избери --</option>
+        <option value="FC Barcelona 2025">FC Barcelona 2025</option>
+        <option value="Real Madrid 2025">Real Madrid 2025</option>
+        <option value="Manchester City 2025">Manchester City 2025</option>
+        <option value="Juventus 2025">Juventus 2025</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="customName">Име на фланелката</label>
+      <input type="text" id="customName" placeholder="Вашето име" required />
+    </div>
+    <div class="form-group">
+      <label for="customNumber">Номер</label>
+      <input type="text" id="customNumber" placeholder="Номер (напр. 10)" required />
+    </div>
+    <div class="form-group">
+      <label for="customSize">Размер</label>
+      <select id="customSize" required>
+        <option value="">-- Размер --</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL</option>
+      </select>
+    </div>
+    <button type="submit" class="order-button">🛠️ Поръчай персонализирано</button>
+  </form>
+
+  <p id="customConfirmation" class="confirmation hidden">✅ Персонализираната поръчка е изпратена!</p>
+</section>

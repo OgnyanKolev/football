@@ -31,6 +31,8 @@ function submitOrder(event) {
 
   // Показване на потвърждение
   document.getElementById("confirmation").classList.remove("hidden");
+  document.getElementById("confirmation").scrollIntoView({ behavior: "smooth" });
+
 
   // Нулиране
   document.getElementById("orderForm").reset();
@@ -40,3 +42,30 @@ function submitOrder(event) {
   cart = [];
   total = 0;
 }
+
+function submitOrder(event) {
+  
+}  // <- край на старата функция
+
+// Вмъкни новата функция тук:
+function submitCustomOrder(event) {
+  event.preventDefault();
+
+  const team = document.getElementById("product").value;
+  const name = document.getElementById("customName").value;
+  const number = document.getElementById("customNumber").value;
+  const size = document.getElementById("customSize").value;
+
+  if (!team || !name || !number || !size) {
+    alert("Моля, попълнете всички полета.");
+    return;
+  }
+
+  document.getElementById("customConfirmation").classList.remove("hidden");
+  document.getElementById("customForm").reset();
+  document.getElementById("customConfirmation").scrollIntoView({ behavior: "smooth" });
+}
+
+
+
+
