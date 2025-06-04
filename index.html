@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <title>Футболни Фланелки 2025/26</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Футболни Фланелки 2025/26</h1>
+  </header>
+
+  <main class="product-grid">
+    <div class="product-grid">
+  <div class="product">
+    <img src="https://placehold.co/250x320?text=Barcelona+2025&font=roboto" alt="Barcelona Jersey">
+    <h2>FC Barcelona 2025</h2>
+    <p class="price">59.99 лв</p>
+    <button onclick="addToCart('FC Barcelona 2025', 59.99)">Добави в количката</button>
+  </div>
+  <div class="product">
+    <img src="https://placehold.co/250x320?text=Real+Madrid+2025&font=roboto" alt="Real Madrid Jersey">
+    <h2>Real Madrid 2025</h2>
+    <p class="price">62.99 лв</p>
+    <button onclick="addToCart('Real Madrid 2025', 62.99)">Добави в количката</button>
+  </div>
+  <div class="product">
+    <img src="https://placehold.co/250x320?text=Man+City+2025&font=roboto" alt="Man City Jersey">
+    <h2>Manchester City 2025</h2>
+    <p class="price">60.50 лв</p>
+    <button onclick="addToCart('Manchester City 2025', 60.50)">Добави в количката</button>
+  </div>
+  <div class="product">
+    <img src="https://placehold.co/250x320?text=Juventus+2025&font=roboto" alt="Juventus Jersey">
+    <h2>Juventus 2025</h2>
+    <p class="price">58.75 лв</p>
+    <button onclick="addToCart('Juventus 2025', 58.75)">Добави в количката</button>
+  </div>
+</div>
+
+  </main>
+
+  <section class="cart-section">
+    <h3>🛒 Количка:</h3>
+    <ul id="cart"></ul>
+    <p id="total">Общо: 0.00 лв</p>
+
+    <form id="orderForm" onsubmit="submitOrder(event)">
+      <input type="text" id="name" placeholder="Име" required />
+      <input type="text" id="address" placeholder="Адрес" required />
+      <button type="submit" class="order-button">Изпрати поръчка</button>
+    </form>
+    <p id="confirmation" class="hidden">✅ Поръчката е изпратена успешно!</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
