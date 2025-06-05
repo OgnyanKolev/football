@@ -1,71 +1,96 @@
+
 let cart = [];
 let total = 0;
 
-function addToCart(productName, price) {
-  cart.push({ name: productName, price: price });
-  total += price;
+function addToCart(productName, price, sizeId) {
+  const sizeElement = document.getElementById(sizeId);
+  if (!sizeElement) return;
+  const size = sizeElement.value;
 
-  const cartList = document.getElementById("cart");
-  const listItem = document.createElement("li");
-  listItem.textContent = `${productName} – ${price.toFixed(2)} лв`;
-  cartList.appendChild(listItem);
+  const existing = cart.find(item => item.name === productName && item.size === size);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({ name: productName, price: price, size: size, quantity: 1 });
+  }
 
-  document.getElementById("total").textContent = `Общо: ${total.toFixed(2)} лв`;
+  updateCartUI();
 }
+
+
+
 
 function submitOrder(event) {
   event.preventDefault();
 
-  const name = document.getElementById("name").value.trim();
-  const address = document.getElementById("address").value.trim();
+  const name = document.getElementById("name").value;
+  const address = document.getElementById("address").value;
 
-  if (cart.length === 0) {
-    alert("Количката е празна.");
+  if (!name || !address || cart.length === 0) {
+    alert("Моля, попълнете всички полета и добавете поне един продукт.");
     return;
   }
 
-  if (!name || !address) {
-    alert("Моля, попълнете всички полета.");
-    return;
-  }
-
-  // Показване на потвърждение
   document.getElementById("confirmation").classList.remove("hidden");
-  document.getElementById("confirmation").scrollIntoView({ behavior: "smooth" });
-
-
-  // Нулиране
   document.getElementById("orderForm").reset();
   document.getElementById("cart").innerHTML = "";
   document.getElementById("total").textContent = "Общо: 0.00 лв";
-
   cart = [];
   total = 0;
 }
+function filterTeam(team) {
+  const allProducts = document.querySelectorAll('.product');
+  allProducts.forEach(product => {
+    if (team === 'all' || product.dataset.team === team) {
+      product.style.display = 'block';
+    } else {
+      product.style.display = 'none';
+    }
+  });
+}
+function updateCartUI() {
+  const cartList = document.getElementById("cart-list");
+  const cartCount = document.getElementById("cart-count");
+  const cartTotal = document.getElementById("cart-total");
 
-function submitOrder(event) {
-  
-}  // <- край на старата функция
+  cartList.innerHTML = "";
+  let totalItems = 0;
+  total = 0;
 
-// Вмъкни новата функция тук:
-function submitCustomOrder(event) {
-  event.preventDefault();
+  cart.forEach((item, index) => {
+    const li = document.createElement("li");
+    totalItems += item.quantity;
+    total += item.price * item.quantity;
 
-  const team = document.getElementById("product").value;
-  const name = document.getElementById("customName").value;
-  const number = document.getElementById("customNumber").value;
-  const size = document.getElementById("customSize").value;
+    li.innerHTML = `
+      ${item.name} (${item.size}) - ${item.price.toFixed(2)} лв x ${item.quantity}
+      <button class="qty-btn" onclick="changeQuantity(${index}, 1)">➕</button>
+      <button class="qty-btn" onclick="changeQuantity(${index}, -1)">➖</button>
+    `;
 
-  if (!team || !name || !number || !size) {
-    alert("Моля, попълнете всички полета.");
-    return;
-  }
+    cartList.appendChild(li);
+  });
 
-  document.getElementById("customConfirmation").classList.remove("hidden");
-  document.getElementById("customForm").reset();
-  document.getElementById("customConfirmation").scrollIntoView({ behavior: "smooth" });
+  cartCount.textContent = totalItems;
+  cartTotal.textContent = "Общо: " + total.toFixed(2) + " лв";
 }
 
 
+function toggleCart() {
+  document.getElementById("cart-panel").classList.toggle("hidden");
+}
+
+function removeFromCart(index) {
+  total -= cart[index].price;
+  cart.splice(index, 1);
+  updateCartUI();
+}
 
 
+function changeQuantity(index, change) {
+  cart[index].quantity += change;
+  if (cart[index].quantity <= 0) {
+    cart.splice(index, 1);
+  }
+  updateCartUI();
+}

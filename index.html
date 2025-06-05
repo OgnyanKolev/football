@@ -10,84 +10,88 @@
 </head>
 <body>
   <nav class="navbar">
-  <div class="logo">⚽ FootballShop</div>
-  <ul class="menu">
-    <li><a href="#">Начало</a></li>
-    <li><a href="#">La Liga</a></li>
-    <li><a href="#">Premier League</a></li>
-    <li><a href="#">Serie A</a></li>
-    <li><a href="#">Национални отбори</a></li>
-    <li><a href="#custom-order">Персонализирай</a></li>
+    <div class="logo">⚽ FootballShop</div>
+    <ul class="menu">
+      <li><a href="#">Начало</a></li>
+      <li class="dropdown">
+        <a href="#">La Liga</a>
+        <ul class="dropdown-menu">
+  <li><a href="#" onclick="filterTeam('barcelona')">FC Barcelona</a></li>
+  <li><a href="#" onclick="filterTeam('real')">Real Madrid</a></li>
+  <li><a href="#" onclick="filterTeam('man-city')">Manchester City</a></li>
+  <li><a href="#" onclick="filterTeam('all')">Покажи всички</a></li>
+</ul>
 
-  </ul>
-</nav>
-
-  <header>
-    <h1>Футболни Фланелки 2025/26</h1>
-  </header>
+      </li>
+      <li class="dropdown">
+        <a href="#">Premier League</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Manchester City</a></li>
+          <li><a href="#">Liverpool</a></li>
+          <li><a href="#">Arsenal</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Serie A</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Juventus</a></li>
+          <li><a href="#">Inter Milan</a></li>
+          <li><a href="#">AC Milan</a></li>
+        </ul>
+      </li>
+      <li><a href="#custom-order">Персонализирай</a></li>
+    </ul>
+  </nav>
 
   <main class="product-grid">
-    <div class="product-grid">
-  <div class="product">
-    <img src="https://placehold.co/250x320?text=Barcelona+2025&font=roboto" alt="Barcelona Jersey">
-    <h2>FC Barcelona 2025</h2>
-    <p class="price">59.99 лв</p>
-    <button onclick="addToCart('FC Barcelona 2025', 59.99)">Добави в количката</button>
-  </div>
-  <div class="product">
-    <img src="https://placehold.co/250x320?text=Real+Madrid+2025&font=roboto" alt="Real Madrid Jersey">
-    <h2>Real Madrid 2025</h2>
-    <p class="price">62.99 лв</p>
-    <button onclick="addToCart('Real Madrid 2025', 62.99)">Добави в количката</button>
-  </div>
-  <div class="product">
-    <img src="https://placehold.co/250x320?text=Man+City+2025&font=roboto" alt="Man City Jersey">
-    <h2>Manchester City 2025</h2>
-    <p class="price">60.50 лв</p>
-    <button onclick="addToCart('Manchester City 2025', 60.50)">Добави в количката</button>
-  </div>
-  <div class="product">
-    <img src="https://placehold.co/250x320?text=Juventus+2025&font=roboto" alt="Juventus Jersey">
-    <h2>Juventus 2025</h2>
-    <p class="price">58.75 лв</p>
-    <button onclick="addToCart('Juventus 2025', 58.75)">Добави в количката</button>
-  </div>
+<div class="product" data-team="barcelona">
+  <img src="images/ogi.jpg" alt="Barcelona Jersey">
+  <h2>FC Barcelona 2025</h2>
+  <p class="price">59.99 лв</p>
+  <label for="size-barcelona">Размер:</label>
+  <select id="size-barcelona">
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+  <button onclick="addToCart('FC Barcelona 2025', 59.99, 'size-barcelona')">Добави в количката</button>
+</div>
+
+<div class="product" data-team="real">
+  <img src="images/ogi.jpg" alt="Real Madrid Jersey">
+  <h2>Real Madrid 2025</h2>
+  <p class="price">62.99 лв</p>
+  <label for="size-real">Размер:</label>
+  <select id="size-real">
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+  <button onclick="addToCart('Real Madrid 2025', 62.99, 'size-real')">Добави в количката</button>
+</div>
+
+<div class="product" data-team="man-city">
+  <img src="images/ogi.jpg" alt="Man City Jersey">
+  <h2>Manchester City 2025</h2>
+  <p class="price">60.50 лв</p>
+  <label for="size-city">Размер:</label>
+  <select id="size-city">
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+  </select>
+  <button onclick="addToCart('Manchester City 2025', 60.50, 'size-city')">Добави в количката</button>
 </div>
 
   </main>
 
-<section class="cart-section">
-  <h3>🛒 Количка:</h3>
-  <ul id="cart"></ul>
-  <p id="total">Общо: 0.00 лв</p>
-
-  <select class="size-select">
-  <option value="">-- Размер --</option>
-  <option>S</option>
-  <option>M</option>
-  <option>L</option>
-  <option>XL</option>
-</select>
-
-
-  <h3>📦 Поръчка:</h3>
-  <form id="orderForm" onsubmit="submitOrder(event)">
-    <div class="form-group">
-      <label for="name">Име</label>
-      <input type="text" id="name" placeholder="Вашето име" required />
-    </div>
-    <div class="form-group">
-      <label for="address">Адрес</label>
-      <input type="text" id="address" placeholder="Вашият адрес" required />
-    </div>
-    <button type="submit" class="order-button">📨 Изпрати поръчка</button>
-  </form>
-
-  <div id="confirmation" class="confirmation hidden">
-    ✅ Благодарим! Поръчката беше изпратена успешно.
-  </div>
-</section>
-
+  <section class="cart-section">
+    <h3>🛒 Количка:</h3>
+    <ul id="cart"></ul>
+    <p id="total">Общо: 0.00 лв</p>
 
     <form id="orderForm" onsubmit="submitOrder(event)">
       <input type="text" id="name" placeholder="Име" required />
@@ -98,41 +102,17 @@
   </section>
 
   <script src="script.js"></script>
+  <!-- Cart Icon (в навигацията) -->
+<div class="cart-icon" onclick="toggleCart()">
+  🛒 <span id="cart-count">0</span>
+</div>
+
+<!-- Cart Panel -->
+<div class="cart-panel hidden" id="cart-panel">
+  <h3>🛒 Количка</h3>
+  <ul id="cart-list"></ul>
+  <p id="cart-total">Общо: 0.00 лв</p>
+</div>
+
 </body>
 </html>
-<section class="custom-order" id="custom-order">
-  <h3>🎨 Персонализирай своята фланелка</h3>
-  <form id="customForm" onsubmit="submitCustomOrder(event)">
-    <div class="form-group">
-      <label for="product">Избери отбор</label>
-      <select id="product" required>
-        <option value="">-- Избери --</option>
-        <option value="FC Barcelona 2025">FC Barcelona 2025</option>
-        <option value="Real Madrid 2025">Real Madrid 2025</option>
-        <option value="Manchester City 2025">Manchester City 2025</option>
-        <option value="Juventus 2025">Juventus 2025</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="customName">Име на фланелката</label>
-      <input type="text" id="customName" placeholder="Вашето име" required />
-    </div>
-    <div class="form-group">
-      <label for="customNumber">Номер</label>
-      <input type="text" id="customNumber" placeholder="Номер (напр. 10)" required />
-    </div>
-    <div class="form-group">
-      <label for="customSize">Размер</label>
-      <select id="customSize" required>
-        <option value="">-- Размер --</option>
-        <option>S</option>
-        <option>M</option>
-        <option>L</option>
-        <option>XL</option>
-      </select>
-    </div>
-    <button type="submit" class="order-button">🛠️ Поръчай персонализирано</button>
-  </form>
-
-  <p id="customConfirmation" class="confirmation hidden">✅ Персонализираната поръчка е изпратена!</p>
-</section>
